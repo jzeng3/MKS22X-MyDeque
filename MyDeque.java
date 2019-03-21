@@ -53,7 +53,7 @@ public class MyDeque<E>{
   }
 
   public void addFirst(E element){
-    if (start == 0 && size > 0){
+    if (start == 0 && size > 0 && size < data.length){
       start = data.length - 1;
     }
     else if (start > 0 && size < data.length){
@@ -62,6 +62,7 @@ public class MyDeque<E>{
     else if (size == data.length){
       System.out.println("resize");
       resize(data);
+      start = data.length - 1;
     }
     data[start] = element;
     size++;
@@ -85,14 +86,18 @@ public class MyDeque<E>{
       int index = 0;
       for (int i = start; i < data.length; i++){
         newAry[index] = array[i];
+        System.out.println(newAry[index]);
         index++;
       }
       for (int i = 0; i <= end; i++){
         newAry[index] = array[i];
+        System.out.println(newAry[index]);
         index++;
       }
     }
+    data = newAry;
     start = 0;
     end = size - 1;
+    System.out.println(toString());
   }
 }
