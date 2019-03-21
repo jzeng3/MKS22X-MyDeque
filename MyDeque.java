@@ -65,12 +65,29 @@ public class MyDeque<E>{
     data[start] = element;
     size++;
   }
-  public void addLast(E element){ }
-  public E removeFirst(){ return element;}
-  public E removeLast(){return element; }
-  public E getFirst(){ return element;}
-  public E getLast(){return element; }
+  //public void addLast(E element){ }
+//  public E removeFirst(){ return element;}
+  //public E removeLast(){return element; }
+  //public E getFirst(){ return element;}
+  //public E getLast(){return element; }
   private void resize(E[] array){
-    
+    @SuppressWarnings("unchecked")
+    E[] newAry = (E[])new Object[array.length * 2];
+    if (start <= end){
+      for (int i = start; i <= end; i++){
+        newAry[i] = array[i];
+      }
+    }
+    else{
+      int index = 0;
+      for (int i = start; i < data.length; i++){
+        newAry[index] = array[i];
+        index++;
+      }
+      for (int i = 0; i <= end; i++){
+        newAry[index] = array[i];
+        index++;
+      }
+    }
   }
 }
