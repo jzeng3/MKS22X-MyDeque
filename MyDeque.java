@@ -53,17 +53,20 @@ public class MyDeque<E>{
   }
 
   public void addFirst(E element){
-    if (start == 0 && size < data.length){
+    if (start == 0 && size > 0){
       start = data.length - 1;
     }
     else if (start > 0 && size < data.length){
       start--;
     }
     else if (size == data.length){
-
+      resize(data);
+      start = data.length - 1;
     }
     data[start] = element;
     size++;
+    System.out.println("start: "+start);
+    System.out.println("end: "+end);
   }
   //public void addLast(E element){ }
 //  public E removeFirst(){ return element;}
@@ -89,5 +92,7 @@ public class MyDeque<E>{
         index++;
       }
     }
+    start = 0;
+    end = size - 1;
   }
 }
