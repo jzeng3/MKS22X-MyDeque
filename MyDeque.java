@@ -60,8 +60,8 @@ public class MyDeque<E>{
       start--;
     }
     else if (size == data.length){
+      System.out.println("resize");
       resize(data);
-      start = data.length - 1;
     }
     data[start] = element;
     size++;
