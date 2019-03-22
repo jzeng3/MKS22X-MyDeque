@@ -2,6 +2,7 @@ public class MyDeque<E>{
   private E[] data;
   private int size, start, end;
 
+  // initiate deque with an empty array of 10 elements, set size, start, end to 0 by default
   public MyDeque(){
     @SuppressWarnings("unchecked")
       E[] d = (E[])new Object[10];
@@ -11,6 +12,7 @@ public class MyDeque<E>{
       end = 0;
      }
 
+// initiate deque with an empty array of specified capacity, set size, start, end to 0 by default
   public MyDeque(int initialCapacity){
     @SuppressWarnings("unchecked")
       E[] d = (E[])new Object[initialCapacity];
@@ -20,14 +22,17 @@ public class MyDeque<E>{
       end = 0;
     }
 
+  // return number of elements in deque
   public int size(){
    return size;
  }
 
+  // for printing out deque
   public String toString(){
     String dataStr = "";
     dataStr += "[";
     if (size > 0){
+      // if start is less than end, just add every element from start to end
       if (start <= end){
       for (int i = start; i <= end; i++){
         dataStr += data[i];
@@ -36,6 +41,8 @@ public class MyDeque<E>{
         }
       }
     }
+     /* if array "loops around," add elements from START of deque to end of the array,
+        then from beginning to END of deque */
       else{
         for (int i = start; i < data.length; i++){
           dataStr += data[i] + ", ";
@@ -52,6 +59,7 @@ public class MyDeque<E>{
     return dataStr;
   }
 
+  // add element to beginning of deque
   public void addFirst(E element){
     if (start == 0 && size > 0 && size < data.length){
       start = data.length - 1;
@@ -59,8 +67,8 @@ public class MyDeque<E>{
     else if (start > 0 && size < data.length){
       start--;
     }
-    else if (size == data.length){
-      System.out.println("resize");
+    else if (size >= data.length){
+      System.out.println("resize to add "+element);
       resize(data);
       start = data.length - 1;
     }
@@ -69,23 +77,25 @@ public class MyDeque<E>{
     System.out.println("start: "+start);
     System.out.println("end: "+end);
   }
-  public void addLast(E element){
-    if (end == 0 && size > 0 && size < data.length){
-    
-      end++;
-    }
-    else if (end >= data.length && size < data.length){
 
-      end = 0;
-    }
-    else if (size == data.length){
+  public void addLast(E element){
+    if (size >= data.length){
+      System.out.println("resize to add "+element);
       resize(data);
 
       end++;
     }
+    else{
+      if (size > 0){
+        end++;
+      }
+      if (end >= data.length){
+        end = 0;
+      }
+    }
     data[end] = element;
     size++;
-    System.out.println("start: "+start);
+    System.out.println("element: "+element+" start: "+start);
     System.out.println("end: "+end);
   }
 //  public E removeFirst(){ return element;}
