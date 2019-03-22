@@ -98,7 +98,21 @@ public class MyDeque<E>{
     System.out.println("element: "+element+" start: "+start);
     System.out.println("end: "+end);
   }
-//  public E removeFirst(){ return element;}
+ public E removeFirst(){
+   E old = data[start];
+   if (size > 0){
+     data[start] = null;
+    if (start <= end || start < data.length - 1){
+      start++;
+    }
+    else{
+      start = 0;
+    }
+    size--;
+   }
+   System.out.println("start now: "+start);
+   return old;
+ }
   //public E removeLast(){return element; }
   //public E getFirst(){ return element;}
   //public E getLast(){return element; }
