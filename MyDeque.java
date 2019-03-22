@@ -69,7 +69,25 @@ public class MyDeque<E>{
     System.out.println("start: "+start);
     System.out.println("end: "+end);
   }
-  //public void addLast(E element){ }
+  public void addLast(E element){
+    if (end == 0 && size > 0 && size < data.length){
+    
+      end++;
+    }
+    else if (end >= data.length && size < data.length){
+
+      end = 0;
+    }
+    else if (size == data.length){
+      resize(data);
+
+      end++;
+    }
+    data[end] = element;
+    size++;
+    System.out.println("start: "+start);
+    System.out.println("end: "+end);
+  }
 //  public E removeFirst(){ return element;}
   //public E removeLast(){return element; }
   //public E getFirst(){ return element;}
@@ -97,7 +115,8 @@ public class MyDeque<E>{
     }
     data = newAry;
     start = 0;
-    end = size - 1;
+    end = size() - 1;
+    System.out.println("end after resize: "+end);
     System.out.println(toString());
   }
 }
