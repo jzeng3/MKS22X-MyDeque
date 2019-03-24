@@ -65,7 +65,7 @@ public class MyDeque<E>{
     debug += "(start, end): "+start+" , "+end + "|| ";
     debug += "[";
     for (int i = 0; i < data.length; i++){
-      debug += i+": "+data[i]+", ";
+      debug += i+": "+data[i]+", \n";
     }
     debug += "]";
     return debug;
@@ -95,7 +95,6 @@ public class MyDeque<E>{
     // set value of array at START as the given element and update size
     data[start] = element;
     size++;
-
   }
 
   // add element to the end of the deque
@@ -149,7 +148,7 @@ public class MyDeque<E>{
 
     // update size and return the old element
     size--;
-    System.out.println("start, end after removing first: "+start+", "+end);
+  //  System.out.println("start, end after removing first: "+start+", "+end);
     return old;
   }
 
@@ -163,23 +162,21 @@ public class MyDeque<E>{
     // store old value at the END and reset value of array at END
     E old = data[end];
     data[end] = null;
-
+    size--;
     // update END by moving it one to the left or "looping" around the array
-    if (end > data.length - 1){
-//System.out.println("end reached, reset to 0");
-      end = 0;
-    }
-    else if (start > end && end == 0){
-    //  System.out.println("beginning reached, loop to end");
-      end = data.length - 1;
+    if (start <= end){
+      if (size() >= 1){
+        end--;
+      }
     }
     else{
-    //  System.out.println("subtract by 1");
-      end--;
+      if (end == 0){
+        end = data.length - 1;
+      }
     }
+    
   //  System.out.println("end after removal: "+end);
     // update size and return old element
-    size--;
     return old;
   }
   // retrieve the first element of the deque
@@ -203,6 +200,12 @@ public class MyDeque<E>{
     return data[end];
   }
 
+  public int getStart(){
+    return start;
+  }
+  public int getEnd(){
+    return end;
+  }
   // resize array by copying over values to a new array with double capacity
   private void resize(E[] array){
     // make new array with double capacity
@@ -235,7 +238,11 @@ public class MyDeque<E>{
     // set new array as data, reset start and end
     data = newAry;
     start = 0;
-    end = size() - 1;
+    if (size() > 1){
+      end = size() - 1;
+    }else{
+      end = 0;
+    }
   }
 
 }
