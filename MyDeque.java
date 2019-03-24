@@ -65,11 +65,12 @@ public class MyDeque<E>{
     debug += "(start, end): "+start+" , "+end + "|| ";
     debug += "[";
     for (int i = 0; i < data.length; i++){
-      debug += data[i]+", ";
+      debug += i+": "+data[i]+", ";
     }
     debug += "]";
     return debug;
   }
+
   // add element to beginning of deque
   public void addFirst(E element){
     // throw exception if attempting to add null element
@@ -133,16 +134,22 @@ public class MyDeque<E>{
     // store old value at the START and reset value of array at START
     E old = data[start];
     data[start] = null;
+  //  System.out.println(data[start] + "should be null");
 
     // update START by moving it by one to the right, or "looping" around to the beginning of the array
-    if (start <= end || start < data.length - 1){
+    if (size == 1){
+      start = end;
+    }
+    else if (start < data.length - 1){
       start++;
     }
-    else{
+    else if (start >= data.length - 1){
       start = 0;
     }
+
     // update size and return the old element
     size--;
+    System.out.println("start, end after removing first: "+start+", "+end);
     return old;
   }
 
