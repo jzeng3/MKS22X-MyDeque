@@ -150,13 +150,16 @@ public class MyDeque<E>{
     data[end] = null;
 
     // update END by moving it one to the left or "looping" around the array
-    if (end >= data.length - 1){
+    if (end > data.length - 1){
+      System.out.println("end reached, reset to 0");
       end = 0;
     }
     else if (start > end && end == 0){
+      System.out.println("beginning reached, loop to end");
       end = data.length - 1;
     }
     else{
+      System.out.println("subtract by 1");
       end--;
     }
     System.out.println("end after removal: "+end);
