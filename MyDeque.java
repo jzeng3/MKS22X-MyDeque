@@ -60,6 +60,16 @@ public class MyDeque<E>{
     return dataStr;
   }
 
+  public String toStringDebug(){
+    String debug = "";
+    debug += "(start, end): "+start+" , "+end + "|| ";
+    debug += "[";
+    for (int i = 0; i < data.length; i++){
+      debug += data[i]+", ";
+    }
+    debug += "]";
+    return debug;
+  }
   // add element to beginning of deque
   public void addFirst(E element){
     // if array is full, resize array and set START as the last index of the array
@@ -149,6 +159,7 @@ public class MyDeque<E>{
     else{
       end--;
     }
+    System.out.println("end after removal: "+end);
     // update size and return old element
     size--;
     return old;
@@ -169,6 +180,7 @@ public class MyDeque<E>{
     if (size == 0){
       throw new NoSuchElementException();
     }
+    System.out.println("retrieving from "+end);
     // otherwise, return element of array at END
     return data[end];
   }
