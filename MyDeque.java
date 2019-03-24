@@ -72,6 +72,10 @@ public class MyDeque<E>{
   }
   // add element to beginning of deque
   public void addFirst(E element){
+    // throw exception if attempting to add null element
+    if (element == null){
+      throw new NullPointerException();
+    }
     // if array is full, resize array and set START as the last index of the array
     if (size >= data.length){
       resize(data);
@@ -95,6 +99,10 @@ public class MyDeque<E>{
 
   // add element to the end of the deque
   public void addLast(E element){
+    // throw exception if trying to add null element
+    if (element == null){
+      throw new NullPointerException();
+    }
     // if array is full, resize array and update END
     if (size >= data.length){
       resize(data);
@@ -151,18 +159,18 @@ public class MyDeque<E>{
 
     // update END by moving it one to the left or "looping" around the array
     if (end > data.length - 1){
-      System.out.println("end reached, reset to 0");
+//System.out.println("end reached, reset to 0");
       end = 0;
     }
     else if (start > end && end == 0){
-      System.out.println("beginning reached, loop to end");
+    //  System.out.println("beginning reached, loop to end");
       end = data.length - 1;
     }
     else{
-      System.out.println("subtract by 1");
+    //  System.out.println("subtract by 1");
       end--;
     }
-    System.out.println("end after removal: "+end);
+  //  System.out.println("end after removal: "+end);
     // update size and return old element
     size--;
     return old;
@@ -183,7 +191,7 @@ public class MyDeque<E>{
     if (size == 0){
       throw new NoSuchElementException();
     }
-    System.out.println("retrieving from "+end);
+  //  System.out.println("retrieving from "+end);
     // otherwise, return element of array at END
     return data[end];
   }
@@ -207,12 +215,12 @@ public class MyDeque<E>{
       int index = 0;
       for (int i = start; i < data.length; i++){
         newAry[index] = array[i];
-        System.out.println(newAry[index]);
+      //  System.out.println(newAry[index]);
         index++;
       }
       for (int i = 0; i <= end; i++){
         newAry[index] = array[i];
-        System.out.println(newAry[index]);
+        //System.out.println(newAry[index]);
         index++;
       }
     }
