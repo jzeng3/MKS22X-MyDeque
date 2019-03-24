@@ -153,7 +153,13 @@ public class MyDeque<E>{
     size--;
     return old;
   }
-  //public E getFirst(){ return element;}
+  // retrieve the first element of the array
+  public E getFirst(){
+    if (size == 0){
+      throw new NoSuchElementException();
+    }
+    return data[start];
+  }
   //public E getLast(){return element; }
 
   // resize array by copying over values to a new array with double capacity
@@ -190,5 +196,5 @@ public class MyDeque<E>{
     start = 0;
     end = size() - 1;
   }
-  
+
 }
