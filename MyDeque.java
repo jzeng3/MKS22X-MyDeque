@@ -153,14 +153,25 @@ public class MyDeque<E>{
     size--;
     return old;
   }
-  // retrieve the first element of the array
+  // retrieve the first element of the deque
   public E getFirst(){
+    // if deque is empty, throw exception
     if (size == 0){
       throw new NoSuchElementException();
     }
+    // otherwise, return element of array at START
     return data[start];
   }
-  //public E getLast(){return element; }
+
+  // retrieve the last element of the deque
+  public E getLast(){
+    // if deque is empty, throw exception
+    if (size == 0){
+      throw new NoSuchElementException();
+    }
+    // otherwise, return element of array at END
+    return data[end];
+  }
 
   // resize array by copying over values to a new array with double capacity
   private void resize(E[] array){
