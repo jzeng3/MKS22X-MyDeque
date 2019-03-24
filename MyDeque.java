@@ -1,3 +1,5 @@
+import java.util.*;
+import java.io.*;
 public class MyDeque<E>{
   private E[] data;
   private int size, start, end;
@@ -11,7 +13,6 @@ public class MyDeque<E>{
       start = 0;
       end = 0;
      }
-
 // initiate deque with an empty array of specified capacity, set size, start, end to 0 by default
   public MyDeque(int initialCapacity){
     @SuppressWarnings("unchecked")
@@ -68,19 +69,19 @@ public class MyDeque<E>{
       start--;
     }
     else if (size >= data.length){
-      System.out.println("resize to add "+element);
+  //    System.out.println("resize to add "+element);
       resize(data);
       start = data.length - 1;
     }
     data[start] = element;
     size++;
-    System.out.println("start: "+start);
-    System.out.println("end: "+end);
+  //  System.out.println("start: "+start);
+  //  System.out.println("end: "+end);
   }
 
   public void addLast(E element){
     if (size >= data.length){
-      System.out.println("resize to add "+element);
+    //  System.out.println("resize to add "+element);
       resize(data);
 
       end++;
@@ -95,12 +96,15 @@ public class MyDeque<E>{
     }
     data[end] = element;
     size++;
-    System.out.println("element: "+element+" start: "+start);
-    System.out.println("end: "+end);
+  //  System.out.println("element: "+element+" start: "+start);
+  //  System.out.println("end: "+end);
   }
  public E removeFirst(){
+   if (size == 0){
+     throw new NoSuchElementException();
+   }
    E old = data[start];
-   if (size > 0){
+
      data[start] = null;
     if (start <= end || start < data.length - 1){
       start++;
@@ -109,11 +113,30 @@ public class MyDeque<E>{
       start = 0;
     }
     size--;
-   }
+
    System.out.println("start now: "+start);
    return old;
  }
-  //public E removeLast(){return element; }
+  public E removeLast(){
+    if (size == 0){
+      throw new NoSuchElementException();
+    }
+
+      E old = data[end];
+    if (end >= data.length - 1){
+      end = 0;
+    }
+    else if (start > end && end == 0){
+      end = data.length - 1;
+    }
+    else{
+      end--;
+    }
+    size--;
+    
+
+    return old;
+  }
   //public E getFirst(){ return element;}
   //public E getLast(){return element; }
   private void resize(E[] array){
@@ -140,7 +163,7 @@ public class MyDeque<E>{
     data = newAry;
     start = 0;
     end = size() - 1;
-    System.out.println("end after resize: "+end);
-    System.out.println(toString());
+  //  System.out.println("end after resize: "+end);
+  //  System.out.println(toString());
   }
 }
