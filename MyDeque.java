@@ -60,6 +60,7 @@ public class MyDeque<E>{
     return dataStr;
   }
 
+  // see placement of each deque element in data
   public String toStringDebug(){
     String debug = "";
     debug += "(start, end): "+start+" , "+end + "|| ";
@@ -133,7 +134,6 @@ public class MyDeque<E>{
     // store old value at the START and reset value of array at START
     E old = data[start];
     data[start] = null;
-  //  System.out.println(data[start] + "should be null");
 
     // update START by moving it by one to the right, or "looping" around to the beginning of the array
     if (size == 1){
@@ -148,7 +148,7 @@ public class MyDeque<E>{
 
     // update size and return the old element
     size--;
-  //  System.out.println("start, end after removing first: "+start+", "+end);
+
     return old;
   }
 
@@ -160,6 +160,7 @@ public class MyDeque<E>{
     }
 
     // store old value at the END and reset value of array at END
+    // also update size
     E old = data[end];
     data[end] = null;
     size--;
@@ -174,9 +175,7 @@ public class MyDeque<E>{
         end = data.length - 1;
       }
     }
-    
-  //  System.out.println("end after removal: "+end);
-    // update size and return old element
+    //  return old element
     return old;
   }
   // retrieve the first element of the deque
@@ -195,7 +194,7 @@ public class MyDeque<E>{
     if (size == 0){
       throw new NoSuchElementException();
     }
-  //  System.out.println("retrieving from "+end);
+
     // otherwise, return element of array at END
     return data[end];
   }
@@ -225,12 +224,12 @@ public class MyDeque<E>{
       int index = 0;
       for (int i = start; i < data.length; i++){
         newAry[index] = array[i];
-      //  System.out.println(newAry[index]);
+
         index++;
       }
       for (int i = 0; i <= end; i++){
         newAry[index] = array[i];
-        //System.out.println(newAry[index]);
+
         index++;
       }
     }
