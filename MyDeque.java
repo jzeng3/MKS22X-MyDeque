@@ -15,6 +15,9 @@ public class MyDeque<E>{
   }
   // initiate deque with an empty array of specified capacity, set size, start, end to 0 by default
   public MyDeque(int initialCapacity){
+    if (initialCapacity <= 0){
+      initialCapacity = 1;
+    }
     @SuppressWarnings("unchecked")
     E[] d = (E[])new Object[initialCapacity];
     data = d;
